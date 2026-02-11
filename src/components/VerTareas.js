@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from './Modal';
 
-const API_URL = 'http://localhost:5000/api/tareas';
+const API_URL = 'https://tasksiandsibackendnodejs-production.up.railway.app/';
 
 const VerTareas = () => {
   const [tareas, setTareas] = useState([]);
