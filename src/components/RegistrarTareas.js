@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const API_URL = 'https://tasksiandsibackendnodejs-production.up.railway.app/';
+const API_URL = 'https://tasksiandsibackendnodejs-production.up.railway.app/api/tareas';
 
 const RegistrarTareas = () => {
   const [formData, setFormData] = useState({
