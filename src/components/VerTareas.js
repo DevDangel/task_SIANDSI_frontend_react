@@ -24,7 +24,20 @@ const VerTareas = () => {
       case 'Culminada':
         return 'from-green-500 to-green-600';
       default:
-        return 'from-blue-600 to-blue-700';
+        return 'from-gray-50 to-gray-50';
+    }
+  };
+
+  const getTextColor = (nom_estado) => {
+    switch (nom_estado) {
+      case 'Backlog':
+      case 'En curso':
+      case 'Pruebas':
+      case 'RetroAlimentacion':
+      case 'Culminada':
+        return 'text-white';
+      default:
+        return 'text-gray-900';
     }
   };
 
@@ -119,7 +132,7 @@ const VerTareas = () => {
               className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer overflow-hidden border border-gray-200 hover:border-blue-400"
             >
               <div className={`bg-gradient-to-r ${getEstadoColor(tarea.nom_estado)} px-4 py-3`}>
-                <h3 className="font-mono text-sm text-white font-semibold">
+                <h3 className={`font-mono text-sm ${getTextColor(tarea.nom_estado)} font-semibold`}>
                   {tarea.codigo_unico}
                 </h3>
               </div>

@@ -28,6 +28,7 @@ const Modal = ({ tarea, onClose }) => {
           <button
             onClick={onClose}
             className="text-white hover:text-gray-200 text-2xl font-bold"
+            title='Cerrar'
           >
             ×
           </button>
