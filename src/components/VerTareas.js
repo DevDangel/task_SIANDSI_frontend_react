@@ -129,6 +129,12 @@ const VerTareas = () => {
                       <span className="font-mono text-xs truncate">{tarea.rama}</span>
                     </div>
                   )}
+                  {tarea.nom_estado && (
+                    <div className="flex items-center gap-2">
+                      <span className="text-gray-400">📊</span>
+                      <span className="truncate">{tarea.nom_estado}</span>
+                    </div>
+                  )}
                 </div>
                 <div className="mt-4 pt-3 border-t border-gray-200">
                   <p className="text-xs text-gray-500">

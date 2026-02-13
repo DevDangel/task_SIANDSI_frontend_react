@@ -78,6 +78,15 @@ const Modal = ({ tarea, onClose }) => {
             </div>
           )}
 
+          {tarea.nom_estado && (
+            <div>
+              <label className="block text-sm font-semibold text-gray-600 mb-1">
+                Estado
+              </label>
+              <p className="text-gray-800">{tarea.nom_estado}</p>
+            </div>
+          )}
+
           {tarea.hash_commit && (
             <div>
               <label className="block text-sm font-semibold text-gray-600 mb-1">

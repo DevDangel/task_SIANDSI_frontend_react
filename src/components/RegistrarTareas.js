@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const API_URL = 'https://tasksiandsibackendnodejs-production.up.railway.app/api/tareas';
@@ -11,12 +11,27 @@ const RegistrarTareas = () => {
     empresa: '',
     submodulo: '',
     rama: '',
+    estado: '',
     hash_commit: ''
   });
 
   const [searchCodigo, setSearchCodigo] = useState('');
   const [mensaje, setMensaje] = useState({ tipo: '', texto: '' });
   const [isEditing, setIsEditing] = useState(false);
+  const [estados, setEstados] = useState([]);
+
+  useEffect(() => {
+    fetchEstados();
+  }, []);
+
+  const fetchEstados = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/estados`);
+      setEstados(response.data);
+    } catch (error) {
+      console.error('Error al cargar estados:', error);
+    }
+  };
 
   const handleInputChange = (e) => {
     setFormData({
@@ -45,6 +60,7 @@ const RegistrarTareas = () => {
         empresa: '',
         submodulo: '',
         rama: '',
+        estado: '',
         hash_commit: ''
       });
       setIsEditing(false);
@@ -96,6 +112,7 @@ const RegistrarTareas = () => {
       empresa: '',
       submodulo: '',
       rama: '',
+      estado: '',
       hash_commit: ''
     });
     setIsEditing(false);
@@ -224,6 +241,25 @@ const RegistrarTareas = () => {
               onChange={handleInputChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Estado
+            </label>
+            <select
+              name="estado"
+              value={formData.estado}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Selecciona un estado</option>
+              {estados.map((estado) => (
+                <option key={estado.id_estado} value={estado.id_estado}>
+                  {estado.nom_estado}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="md:col-span-2">
