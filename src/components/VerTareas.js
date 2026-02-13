@@ -11,6 +11,23 @@ const VerTareas = () => {
   const [selectedTarea, setSelectedTarea] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const getEstadoColor = (nom_estado) => {
+    switch (nom_estado) {
+      case 'Backlog':
+        return 'from-gray-500 to-gray-600';
+      case 'En curso':
+        return 'from-blue-500 to-blue-600';
+      case 'Pruebas':
+        return 'from-yellow-400 to-yellow-500';
+      case 'RetroAlimentacion':
+        return 'from-red-400 to-red-500';
+      case 'Culminada':
+        return 'from-green-500 to-green-600';
+      default:
+        return 'from-blue-600 to-blue-700';
+    }
+  };
+
   useEffect(() => {
     fetchTareas();
   }, []);
@@ -101,7 +118,7 @@ const VerTareas = () => {
               onClick={() => handleCardClick(tarea)}
               className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer overflow-hidden border border-gray-200 hover:border-blue-400"
             >
-              <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-3">
+              <div className={`bg-gradient-to-r ${getEstadoColor(tarea.nom_estado)} px-4 py-3`}>
                 <h3 className="font-mono text-sm text-white font-semibold">
                   {tarea.codigo_unico}
                 </h3>
