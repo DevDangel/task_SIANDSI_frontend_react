@@ -46,7 +46,7 @@ const NotasModal = ({ tarea, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={handleClose}>
-      <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full h-[80vh] overflow-y-scroll" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+      <div className="bg-white rounded-lg shadow-xl max-w-5xl w-full h-[90vh] overflow-y-scroll" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         <div className="bg-white text-gray-800 px-6 py-4 rounded-t-lg flex justify-between items-center border-b border-gray-200">
           <h3 className="text-xl font-bold">📝 Notas de la Tarea: {tarea.titulo}</h3>
           <button
@@ -86,7 +86,7 @@ const NotasModal = ({ tarea, onClose }) => {
               value={notaDesc}
               onChange={(e) => setNotaDesc(e.target.value)}
               readOnly={!isEditing}
-              className="w-full h-96 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="w-full h-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
               placeholder="Escribe tus notas aquí..."
             />
           )}
