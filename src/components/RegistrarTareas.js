@@ -25,7 +25,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
   }, []);
 
   useEffect(() => {
-    if (tareaEdit) {
+    if (tareaEdit && estados.length > 0) {
       const estadoEncontrado = estados.find(est => est.nom_estado === tareaEdit.nom_estado);
       setFormData({
         codigo_unico: tareaEdit.codigo_unico || '',
