@@ -22,8 +22,8 @@ const Modal = ({ tarea, onClose, onEdit }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="bg-gradient-to-r from-white to-gray-100 text-gray-800 px-6 py-4 rounded-t-lg flex justify-between items-center">
+      <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-scroll" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <div className="bg-white text-gray-800 px-6 py-4 rounded-t-lg flex justify-between items-center border-b border-gray-200">
           <div className="flex items-center gap-4">
             <h3 className="text-xl font-bold">📋 Detalles de la Tarea</h3>
             <button
