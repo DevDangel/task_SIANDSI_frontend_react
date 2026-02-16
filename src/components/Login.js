@@ -97,17 +97,18 @@ const Login = ({ onLogin }) => {
               {loading ? 'Iniciando...' : 'Iniciar Sesión'}
             </button>
           </form>
-
-          <div className="mt-8 text-center text-sm text-gray-600">
-            <p>Usuario de prueba:</p>
-            <p className="font-mono bg-gray-100 px-2 py-1 rounded mt-1">DevDangel98</p>
-          </div>
         </div>
       </div>
 
       {/* Lado derecho: Imagen/Contenido */}
-      <div className="w-1/2 bg-gradient-to-br from-blue-600 to-purple-700 flex items-center justify-center p-8">
-        <div className="text-center text-white">
+      <div className="w-1/2 bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800 flex items-center justify-center p-8 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
+        <img
+          src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center"
+          alt="Metodología Ágil"
+          className="absolute inset-0 w-full h-full object-cover filter brightness-75 contrast-110"
+        />
+        <div className="relative z-10 text-center text-white">
           <div className="mb-8">
             <svg className="w-24 h-24 mx-auto mb-4 text-white opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
