@@ -38,14 +38,8 @@ const NotasModal = ({ tarea, onClose }) => {
     }
   };
 
-  const handleClose = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={handleClose}>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-5xl w-full h-[90vh] flex flex-col overflow-hidden">
         <div className="bg-white text-gray-800 px-6 py-4 rounded-t-lg flex justify-between items-center border-b border-gray-200 flex-shrink-0">
           <h3 className="text-xl font-bold">📝 Notas de la Tarea: {tarea.titulo}</h3>
@@ -59,19 +53,29 @@ const NotasModal = ({ tarea, onClose }) => {
         </div>
 
         <div className="p-6 flex-1 flex flex-col overflow-hidden">
-          <div className="mb-4 flex-shrink-0">
-            <button
-              onClick={() => setIsEditing(!isEditing)}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              {isEditing ? 'Cancelar' : '+ Agregar Nota'}
-            </button>
-            {isEditing && (
+          <div className="mb-4 flex-shrink-0 flex justify-between items-center">
+            <div>
               <button
-                onClick={handleSave}
-                className="ml-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                onClick={() => setIsEditing(!isEditing)}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
-                💾 Guardar Nota
+                {isEditing ? 'Cancelar' : '+ Agregar Nota'}
+              </button>
+              {isEditing && (
+                <button
+                  onClick={handleSave}
+                  className="ml-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                >
+                  💾 Guardar Nota
+                </button>
+              )}
+            </div>
+            {!isEditing && (
+              <button
+                onClick={onClose}
+                className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+              >
+                Cerrar
               </button>
             )}
           </div>
