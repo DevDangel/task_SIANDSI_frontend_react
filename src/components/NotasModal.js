@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const API_URL = 'https://tasksiandsibackendnodejs-production.up.railway.app/api/tareas';
 
 const NotasModal = ({ tarea, onClose }) => {
-  const [notas, setNotas] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [notaDesc, setNotaDesc] = useState('');
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchNotas();
-  }, [tarea.id]);
-
-  const fetchNotas = async () => {
+  const fetchNotas = useCallback(async () => {
     try {
       setLoading(true);
       const response = await axios.get(`${API_URL}/${tarea.id}/notas`);
-      setNotas(response.data);
       if (response.data.length > 0) {
         setNotaDesc(response.data[0].nota_desc || '');
+      } else {
+        setNotaDesc('');
       }
     } catch (error) {
       console.error('Error al obtener notas:', error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [tarea.id]);
+
+  useEffect(() => {
+    fetchNotas();
+  }, [fetchNotas]);
 
   const handleSave = async () => {
     try {
