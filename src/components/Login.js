@@ -102,11 +102,11 @@ const Login = ({ onLogin }) => {
 
       {/* Lado derecho: Imagen/Contenido */}
       <div className="w-1/2 bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800 flex items-center justify-center p-8 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/50"></div>
         <img
           src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center"
           alt="Metodología Ágil"
-          className="absolute inset-0 w-full h-full object-cover filter brightness-75 contrast-110"
+          className="absolute inset-0 w-full h-full object-cover filter brightness-50 blur-sm"
         />
         <div className="relative z-10 text-center text-white">
           <div className="mb-8">
