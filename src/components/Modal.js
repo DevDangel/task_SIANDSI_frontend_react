@@ -1,6 +1,8 @@
 import React from 'react';
+import NotasModal from './NotasModal';
 
 const Modal = ({ tarea, onClose, onEdit }) => {
+  const [showNotas, setShowNotas] = React.useState(false);
   if (!tarea) return null;
 
   const getEstadoBgColor = (nom_estado) => {
@@ -36,13 +38,21 @@ const Modal = ({ tarea, onClose, onEdit }) => {
               </svg>
             </button>
           </div>
-          <button
-            onClick={onClose}
-            className="text-gray-800 hover:text-gray-600 text-2xl font-bold"
-            title='Cerrar'
-          >
-            ×
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setShowNotas(true)}
+              className="px-3 py-1 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 text-sm"
+            >
+              Notas
+            </button>
+            <button
+              onClick={onClose}
+              className="text-gray-800 hover:text-gray-600 text-2xl font-bold"
+              title='Cerrar'
+            >
+              ×
+            </button>
+          </div>
         </div>
 
         <div className="p-6 space-y-4">
@@ -150,6 +160,8 @@ const Modal = ({ tarea, onClose, onEdit }) => {
           </button>
         </div>
       </div>
+
+      {showNotas && <NotasModal tarea={tarea} onClose={() => setShowNotas(false)} />}
     </div>
   );
 };
