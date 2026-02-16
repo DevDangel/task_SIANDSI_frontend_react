@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Sidebar = ({ activeSection, setActiveSection }) => {
+const Sidebar = ({ activeSection, setActiveSection, onLogout }) => {
   return (
     <div className="w-64 bg-gray-800 text-white h-screen fixed left-0 top-0">
       <div className="p-6">
@@ -18,13 +18,19 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
           </button>
           <button
             onClick={() => setActiveSection('ver')}
-            className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full text-left px-4 py-3 mb-2 rounded-lg transition-colors ${
               activeSection === 'ver'
                 ? 'bg-blue-600 text-white'
                 : 'hover:bg-gray-700'
             }`}
           >
              Ver Tareas
+          </button>
+          <button
+            onClick={onLogout}
+            className="w-full text-left px-4 py-3 rounded-lg transition-colors hover:bg-red-600 mt-8"
+          >
+            Cerrar Sesión
           </button>
         </nav>
       </div>
