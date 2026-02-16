@@ -26,6 +26,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
 
   useEffect(() => {
     if (tareaEdit) {
+      const estadoEncontrado = estados.find(est => est.nom_estado === tareaEdit.nom_estado);
       setFormData({
         codigo_unico: tareaEdit.codigo_unico || '',
         titulo: tareaEdit.titulo || '',
@@ -33,13 +34,13 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
         empresa: tareaEdit.empresa || '',
         submodulo: tareaEdit.submodulo || '',
         rama: tareaEdit.rama || '',
-        estado: tareaEdit.nom_estado || '',
+        estado: estadoEncontrado ? estadoEncontrado.id_estado : '',
         hash_commit: tareaEdit.hash_commit || ''
       });
       setIsEditing(true);
       setTareaEdit(null); // Limpiar después de cargar
     }
-  }, [tareaEdit, setTareaEdit]);
+  }, [tareaEdit, estados, setTareaEdit]);
 
   const fetchEstados = async () => {
     try {
