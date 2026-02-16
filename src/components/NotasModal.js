@@ -58,8 +58,8 @@ const NotasModal = ({ tarea, onClose }) => {
           </button>
         </div>
 
-        <div className="p-6">
-          <div className="mb-4">
+        <div className="p-6 flex-1 flex flex-col">
+          <div className="mb-4 flex-shrink-0">
             <button
               onClick={() => setIsEditing(!isEditing)}
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -77,16 +77,18 @@ const NotasModal = ({ tarea, onClose }) => {
           </div>
 
           {loading ? (
-            <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-              <p className="mt-4 text-gray-600">Cargando notas...</p>
+            <div className="flex-1 flex items-center justify-center">
+              <div className="text-center">
+                <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                <p className="mt-4 text-gray-600">Cargando notas...</p>
+              </div>
             </div>
           ) : (
             <textarea
               value={notaDesc}
               onChange={(e) => setNotaDesc(e.target.value)}
               readOnly={!isEditing}
-              className="w-full h-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="flex-1 w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
               placeholder="Escribe tus notas aquí..."
             />
           )}
