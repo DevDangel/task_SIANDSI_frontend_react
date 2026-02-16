@@ -53,23 +53,21 @@ const NotasModal = ({ tarea, onClose }) => {
         </div>
 
         <div className="p-6 flex-1 flex flex-col overflow-hidden">
-          <div className="mb-4 flex-shrink-0 flex justify-between items-center">
-            <div>
+          <div className="mb-4 flex-shrink-0 flex gap-2">
+            <button
+              onClick={() => setIsEditing(!isEditing)}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              {isEditing ? 'Cancelar' : '+ Agregar Nota'}
+            </button>
+            {isEditing && (
               <button
-                onClick={() => setIsEditing(!isEditing)}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                onClick={handleSave}
+                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
               >
-                {isEditing ? 'Cancelar' : '+ Agregar Nota'}
+                💾 Guardar Nota
               </button>
-              {isEditing && (
-                <button
-                  onClick={handleSave}
-                  className="ml-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-                >
-                  💾 Guardar Nota
-                </button>
-              )}
-            </div>
+            )}
             {!isEditing && (
               <button
                 onClick={onClose}
