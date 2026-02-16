@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Modal = ({ tarea, onClose }) => {
+const Modal = ({ tarea, onClose, onEdit }) => {
   if (!tarea) return null;
 
   const getEstadoBgColor = (nom_estado) => {
@@ -24,7 +24,18 @@ const Modal = ({ tarea, onClose }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="bg-blue-600 text-white px-6 py-4 rounded-t-lg flex justify-between items-center">
-          <h3 className="text-xl font-bold">📋 Detalles de la Tarea</h3>
+          <div className="flex items-center gap-4">
+            <h3 className="text-xl font-bold">📋 Detalles de la Tarea</h3>
+            <button
+              onClick={() => onEdit(tarea)}
+              className="text-white hover:text-gray-200 text-lg"
+              title="Ir a actualizarla"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </button>
+          </div>
           <button
             onClick={onClose}
             className="text-white hover:text-gray-200 text-2xl font-bold"

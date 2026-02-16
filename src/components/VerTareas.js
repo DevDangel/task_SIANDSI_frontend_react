@@ -4,7 +4,7 @@ import Modal from './Modal';
 
 const API_URL = 'https://tasksiandsibackendnodejs-production.up.railway.app/api/tareas';
 
-const VerTareas = () => {
+const VerTareas = ({ setActiveSection, setTareaEdit }) => {
   const [tareas, setTareas] = useState([]);
   const [tareasFiltradas, setTareasFiltradas] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -77,6 +77,11 @@ const VerTareas = () => {
 
   const closeModal = () => {
     setSelectedTarea(null);
+  };
+
+  const handleEdit = (tarea) => {
+    setTareaEdit(tarea);
+    setActiveSection('registrar');
   };
 
   return (
@@ -178,7 +183,7 @@ const VerTareas = () => {
       )}
 
       {/* Modal */}
-      {selectedTarea && <Modal tarea={selectedTarea} onClose={closeModal} />}
+      {selectedTarea && <Modal tarea={selectedTarea} onClose={closeModal} onEdit={handleEdit} />}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const API_URL = 'https://tasksiandsibackendnodejs-production.up.railway.app/api/tareas';
 
-const RegistrarTareas = () => {
+const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
   const [formData, setFormData] = useState({
     codigo_unico: '',
     titulo: '',
@@ -23,6 +23,23 @@ const RegistrarTareas = () => {
   useEffect(() => {
     fetchEstados();
   }, []);
+
+  useEffect(() => {
+    if (tareaEdit) {
+      setFormData({
+        codigo_unico: tareaEdit.codigo_unico || '',
+        titulo: tareaEdit.titulo || '',
+        url_tarea: tareaEdit.url_tarea || '',
+        empresa: tareaEdit.empresa || '',
+        submodulo: tareaEdit.submodulo || '',
+        rama: tareaEdit.rama || '',
+        estado: tareaEdit.nom_estado || '',
+        hash_commit: tareaEdit.hash_commit || ''
+      });
+      setIsEditing(true);
+      setTareaEdit(null); // Limpiar después de cargar
+    }
+  }, [tareaEdit, setTareaEdit]);
 
   const fetchEstados = async () => {
     try {
