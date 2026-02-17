@@ -28,11 +28,15 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
   useEffect(() => {
     if (tareaEdit && estados.length > 0) {
       const estadoEncontrado = estados.find(est => est.nom_estado === tareaEdit.nom_estado);
+      let empresaValue = tareaEdit.empresa || '';
+      if (empresaValue.startsWith('192.168.1.32/')) {
+        empresaValue = empresaValue.slice(13);
+      }
       setFormData({
         codigo_unico: tareaEdit.codigo_unico || '',
         titulo: tareaEdit.titulo || '',
         url_tarea: tareaEdit.url_tarea || '',
-        empresa: tareaEdit.empresa || '',
+        empresa: empresaValue,
         submodulo: tareaEdit.submodulo || '',
         rama: tareaEdit.rama || '',
         estado: estadoEncontrado ? estadoEncontrado.id_estado : '',
@@ -46,10 +50,11 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
   const handleEmpresaKeyDown = (e) => {
     const input = empresaInputRef.current;
     const start = input.selectionStart;
-    const end = input.selectionEnd;
     const prefixLength = '192.168.1.32/'.length;
 
-    if ((e.key === 'Backspace' || e.key === 'Delete') && (start < prefixLength || end < prefixLength)) {
+    if (e.key === 'Backspace' && start <= prefixLength) {
+      e.preventDefault();
+    } else if (e.key === 'Delete' && start < prefixLength) {
       e.preventDefault();
     }
   };
@@ -66,13 +71,14 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === 'empresa') {
-      // Extraer la parte después del prefijo
       const prefix = '192.168.1.32/';
-      const editablePart = value.startsWith(prefix) ? value.slice(prefix.length) : value;
-      setFormData({
-        ...formData,
-        empresa: editablePart
-      });
+      if (value.startsWith(prefix)) {
+        setFormData({
+          ...formData,
+          empresa: value.slice(prefix.length)
+        });
+      }
+      // If not starts with prefix, do nothing to prevent invalid input
     } else {
       setFormData({
         ...formData,
@@ -89,7 +95,11 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
 
     try {
       const response = await axios.get(`${API_URL}/buscar/${searchCodigo}`);
-      setFormData(response.data);
+      let data = response.data;
+      if (data.empresa && data.empresa.startsWith('192.168.1.32/')) {
+        data.empresa = data.empresa.slice(13);
+      }
+      setFormData(data);
       setIsEditing(true);
       setMensaje({ tipo: 'success', texto: 'Tarea encontrada. Puedes editarla.' });
     } catch (error) {
@@ -116,12 +126,17 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
       return;
     }
 
+    const dataToSend = {
+      ...formData,
+      empresa: '192.168.1.32/' + formData.empresa
+    };
+
     try {
       if (isEditing) {
-        await axios.put(`${API_URL}/${formData.codigo_unico}`, formData);
+        await axios.put(`${API_URL}/${formData.codigo_unico}`, dataToSend);
         setMensaje({ tipo: 'success', texto: '✅ Tarea actualizada exitosamente' });
       } else {
-        await axios.post(API_URL, formData);
+        await axios.post(API_URL, dataToSend);
         setMensaje({ tipo: 'success', texto: '✅ Tarea creada exitosamente' });
       }
       
@@ -255,6 +270,14 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
               value={`192.168.1.32/${formData.empresa}`}
               onChange={handleInputChange}
               onKeyDown={handleEmpresaKeyDown}
+              onClick={() => {
+                const input = empresaInputRef.current;
+                const start = input.selectionStart;
+                const prefixLength = '192.168.1.32/'.length;
+                if (start < prefixLength) {
+                  input.setSelectionRange(prefixLength, prefixLength);
+                }
+              }}
               ref={empresaInputRef}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
