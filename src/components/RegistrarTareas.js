@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 const API_URL = 'https://tasksiandsibackendnodejs-production.up.railway.app/api/tareas';
@@ -19,6 +19,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
   const [mensaje, setMensaje] = useState({ tipo: '', texto: '' });
   const [isEditing, setIsEditing] = useState(false);
   const [estados, setEstados] = useState([]);
+  const empresaInputRef = useRef(null);
 
   useEffect(() => {
     fetchEstados();
@@ -42,7 +43,18 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
     }
   }, [tareaEdit, estados, setTareaEdit]);
 
-  const fetchEstados = async () => {
+  const handleEmpresaKeyDown = (e) => {
+    const input = empresaInputRef.current;
+    const start = input.selectionStart;
+    const end = input.selectionEnd;
+    const prefixLength = '192.168.1.32/'.length;
+
+    if ((e.key === 'Backspace' || e.key === 'Delete') && (start < prefixLength || end < prefixLength)) {
+      e.preventDefault();
+    }
+  };
+
+  async function fetchEstados() {
     try {
       const response = await axios.get(`${API_URL}/estados`);
       setEstados(response.data);
@@ -52,10 +64,21 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
   };
 
   const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    if (name === 'empresa') {
+      // Extraer la parte después del prefijo
+      const prefix = '192.168.1.32/';
+      const editablePart = value.startsWith(prefix) ? value.slice(prefix.length) : value;
+      setFormData({
+        ...formData,
+        empresa: editablePart
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   const handleSearch = async () => {
@@ -229,8 +252,10 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
             <input
               type="text"
               name="empresa"
-              value={formData.empresa}
+              value={`192.168.1.32/${formData.empresa}`}
               onChange={handleInputChange}
+              onKeyDown={handleEmpresaKeyDown}
+              ref={empresaInputRef}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
