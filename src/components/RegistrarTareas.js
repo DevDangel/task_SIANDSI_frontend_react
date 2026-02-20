@@ -160,6 +160,35 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
     }
   };
 
+  const handleDelete = async () => {
+    if (!window.confirm('¿Estás seguro de que quieres eliminar esta tarea? Esta acción no se puede deshacer.')) {
+      return;
+    }
+
+    try {
+      await axios.delete(`${API_URL}/${formData.codigo_unico}`);
+      setMensaje({ tipo: 'success', texto: '✅ Tarea eliminada exitosamente' });
+      
+      // Limpiar formulario
+      setFormData({
+        codigo_unico: '',
+        titulo: '',
+        url_tarea: '',
+        empresa: '',
+        submodulo: '',
+        rama: '',
+        hash_commit: ''
+      });
+      setIsEditing(false);
+      setSearchCodigo('');
+    } catch (error) {
+      setMensaje({ 
+        tipo: 'error', 
+        texto: error.response?.data?.error || 'Error al eliminar la tarea' 
+      });
+    }
+  };
+
   const limpiarFormulario = () => {
     setFormData({
       codigo_unico: '',
@@ -349,6 +378,15 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
           >
             {isEditing ? '💾 Actualizar Tarea' : '➕ Crear Tarea'}
           </button>
+          {isEditing && (
+            <button
+              type="button"
+              onClick={handleDelete}
+              className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold"
+            >
+              🗑️ Eliminar Tarea
+            </button>
+          )}
           <button
             type="button"
             onClick={limpiarFormulario}
