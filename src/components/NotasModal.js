@@ -90,6 +90,9 @@ const NotasModal = ({ tarea, onClose }) => {
               value={notaDesc}
               onChange={(e) => setNotaDesc(e.target.value)}
               readOnly={!isEditing}
+              spellCheck={false}
+              autoCorrect="off"
+              autoCapitalize="off"
               className="flex-1 w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none overflow-auto"
               placeholder="Escribe tus notas aquí..."
             />
