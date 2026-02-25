@@ -207,10 +207,10 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
 
   return (
     <div className="p-8">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">Registrar Tareas</h2>
+      <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200">Registrar Tareas</h2>
 
       {/* Barra de búsqueda */}
-      <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 mb-6">
         <h3 className="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300">🔍 Buscar por Código</h3>
         <div className="flex gap-3">
           <input
@@ -218,7 +218,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
             value={searchCodigo}
             onChange={(e) => setSearchCodigo(e.target.value)}
             placeholder="Ingresa el código único"
-            className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
           />
           <button
@@ -244,7 +244,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
       )}
 
       {/* Formulario */}
-      <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+      <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -256,7 +256,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
               value={formData.codigo_unico}
               onChange={handleInputChange}
               disabled={isEditing}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 dark:disabled:bg-gray-700"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 dark:disabled:bg-gray-700"
               required
             />
           </div>
@@ -270,7 +270,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
               name="titulo"
               value={formData.titulo}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
@@ -284,7 +284,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
               name="url_tarea"
               value={formData.url_tarea}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="https://..."
             />
           </div>
@@ -308,7 +308,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
                 }
               }}
               ref={empresaInputRef}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -321,7 +321,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
               name="submodulo"
               value={formData.submodulo}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -334,7 +334,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
               name="rama"
               value={formData.rama}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -346,7 +346,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
               name="estado"
               value={formData.estado}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Selecciona un estado</option>
               {estados.map((estado) => (
@@ -366,7 +366,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
               name="hash_commit"
               value={formData.hash_commit}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>

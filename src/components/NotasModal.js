@@ -40,8 +40,8 @@ const NotasModal = ({ tarea, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-5xl w-full h-[90vh] flex flex-col overflow-hidden">
-        <div className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-6 py-4 rounded-t-lg flex justify-between items-center border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
+      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-xl max-w-5xl w-full h-[90vh] flex flex-col overflow-hidden">
+        <div className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 px-6 py-4 rounded-t-lg flex justify-between items-center border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
           <h3 className="text-xl font-bold">📝 Notas de la Tarea: {tarea.titulo}</h3>
           <button
             onClick={onClose}
@@ -93,7 +93,7 @@ const NotasModal = ({ tarea, onClose }) => {
               spellCheck={false}
               autoCorrect="off"
               autoCapitalize="off"
-              className="flex-1 w-full p-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none overflow-auto"
+              className="flex-1 w-full p-4 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none overflow-auto"
               placeholder="Escribe tus notas aquí..."
             />
           )}

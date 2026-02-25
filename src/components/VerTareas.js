@@ -86,10 +86,10 @@ const VerTareas = ({ setActiveSection, setTareaEdit }) => {
 
   return (
     <div className="p-8">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">Ver Tareas</h2>
+      <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200">Ver Tareas</h2>
 
       {/* Barra de búsqueda */}
-      <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 mb-6">
         <div className="flex items-center gap-3">
           <span className="text-2xl">🔍</span>
           <input
@@ -97,7 +97,7 @@ const VerTareas = ({ setActiveSection, setTareaEdit }) => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Buscar por código o título..."
-            className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {searchTerm && (
             <button
@@ -134,7 +134,7 @@ const VerTareas = ({ setActiveSection, setTareaEdit }) => {
             <div
               key={tarea.id}
               onClick={() => handleCardClick(tarea)}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-blue-400"
+              className="bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-blue-400"
             >
               <div className={`bg-gradient-to-r ${getEstadoColor(tarea.nom_estado)} px-4 py-3`}>
                 <h3 className={`font-mono text-sm ${getTextColor(tarea.nom_estado)} font-semibold`}>
