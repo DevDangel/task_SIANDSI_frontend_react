@@ -374,7 +374,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
         <div className="flex gap-4 mt-6">
           <button
             type="submit"
-            className="flex-1 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold"
+            className="flex-1 px-6 py-3 bg-green-600 dark:bg-green-700 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-800 transition-colors font-semibold"
           >
             {isEditing ? '💾 Actualizar Tarea' : '➕ Crear Tarea'}
           </button>
@@ -382,7 +382,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
             <button
               type="button"
               onClick={handleDelete}
-              className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold"
+              className="px-6 py-3 bg-red-600 dark:bg-red-700 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-800 transition-colors font-semibold"
             >
               🗑️ Eliminar Tarea
             </button>
@@ -390,7 +390,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
           <button
             type="button"
             onClick={limpiarFormulario}
-            className="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+            className="px-6 py-3 bg-gray-500 dark:bg-gray-600 text-white rounded-lg hover:bg-gray-600 dark:hover:bg-gray-700 transition-colors"
           >
             🔄 Limpiar
           </button>

@@ -63,7 +63,7 @@ const Modal = ({ tarea, onClose, onEdit }) => {
             <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1">
               Código Único
             </label>
-            <p className="text-lg font-mono bg-gray-100 dark:bg-gray-700 px-3 py-2 rounded">
+            <p className="text-lg font-mono bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2 rounded">
               {tarea.codigo_unico}
             </p>
           </div>
