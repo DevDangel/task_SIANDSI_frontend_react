@@ -211,7 +211,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
 
       {/* Barra de búsqueda */}
       <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-        <h3 className="text-lg font-semibold mb-4 text-gray-700">🔍 Buscar por Código</h3>
+        <h3 className="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300">🔍 Buscar por Código</h3>
         <div className="flex gap-3">
           <input
             type="text"
@@ -244,10 +244,10 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
       )}
 
       {/* Formulario */}
-      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6">
+      <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Código Único <span className="text-red-500">*</span>
             </label>
             <input
@@ -256,13 +256,13 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
               value={formData.codigo_unico}
               onChange={handleInputChange}
               disabled={isEditing}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 dark:disabled:bg-gray-700"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Título <span className="text-red-500">*</span>
             </label>
             <input

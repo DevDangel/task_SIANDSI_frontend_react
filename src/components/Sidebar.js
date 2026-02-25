@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Sidebar = ({ activeSection, setActiveSection, onLogout }) => {
+const Sidebar = ({ activeSection, setActiveSection, onLogout, theme, toggleTheme }) => {
   return (
-    <div className="w-64 bg-gray-800 text-white h-screen fixed left-0 top-0">
+    <div className="w-64 bg-gray-800 dark:bg-gray-800 text-white dark:text-white h-screen fixed left-0 top-0">
       <div className="p-6">
         <h1 className="text-2xl font-bold mb-8">Backlog Tareas</h1>
         <nav>
@@ -11,7 +11,7 @@ const Sidebar = ({ activeSection, setActiveSection, onLogout }) => {
             className={`w-full text-left px-4 py-3 mb-2 rounded-lg transition-colors ${
               activeSection === 'registrar'
                 ? 'bg-blue-600 text-white'
-                : 'hover:bg-gray-700'
+                : 'hover:bg-gray-700 dark:hover:bg-gray-600'
             }`}
           >
             Registrar Tareas
@@ -21,10 +21,16 @@ const Sidebar = ({ activeSection, setActiveSection, onLogout }) => {
             className={`w-full text-left px-4 py-3 mb-2 rounded-lg transition-colors ${
               activeSection === 'ver'
                 ? 'bg-blue-600 text-white'
-                : 'hover:bg-gray-700'
+                : 'hover:bg-gray-700 dark:hover:bg-gray-600'
             }`}
           >
              Ver Tareas
+          </button>
+          <button
+            onClick={toggleTheme}
+            className="w-full text-left px-4 py-3 mb-4 rounded-lg transition-colors hover:bg-gray-700 dark:hover:bg-gray-600"
+          >
+            {theme === 'light' ? 'Modo Oscuro' : 'Modo Claro'}
           </button>
           <button
             onClick={onLogout}

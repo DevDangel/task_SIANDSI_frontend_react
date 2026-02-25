@@ -8,12 +8,16 @@ function App() {
   const [activeSection, setActiveSection] = useState('registrar');
   const [tareaEdit, setTareaEdit] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
       setIsLoggedIn(true);
     }
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
   }, []);
 
   const handleLogin = () => {
@@ -26,13 +30,20 @@ function App() {
     setIsLoggedIn(false);
   };
 
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+  };
+
   if (!isLoggedIn) {
     return <Login onLogin={handleLogin} />;
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} onLogout={handleLogout} />
+    <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
+      <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} onLogout={handleLogout} theme={theme} toggleTheme={toggleTheme} />
       
       <main className="ml-64 flex-1">
         {activeSection === 'registrar' ? (
