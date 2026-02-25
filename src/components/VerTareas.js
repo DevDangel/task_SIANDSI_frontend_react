@@ -97,18 +97,18 @@ const VerTareas = ({ setActiveSection, setTareaEdit }) => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Buscar por código o título..."
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {searchTerm && (
             <button
               onClick={() => setSearchTerm('')}
-              className="px-4 py-2 text-gray-600 hover:text-gray-800"
+              className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
             >
               ✕
             </button>
           )}
         </div>
-        <p className="text-sm text-gray-600 mt-2">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
           {tareasFiltradas.length} tarea(s) encontrada(s)
         </p>
       </div>
@@ -117,14 +117,14 @@ const VerTareas = ({ setActiveSection, setTareaEdit }) => {
       {loading ? (
         <div className="text-center py-12">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-gray-600">Cargando tareas...</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Cargando tareas...</p>
         </div>
       ) : tareasFiltradas.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-md p-12 text-center">
-          <p className="text-xl text-gray-600">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-12 text-center">
+          <p className="text-xl text-gray-600 dark:text-gray-400">
             {searchTerm ? '😕 No se encontraron tareas' : '📝 No hay tareas registradas'}
           </p>
-          <p className="text-gray-500 mt-2">
+          <p className="text-gray-500 dark:text-gray-400 mt-2">
             {!searchTerm && 'Comienza registrando tu primera tarea'}
           </p>
         </div>
@@ -134,7 +134,7 @@ const VerTareas = ({ setActiveSection, setTareaEdit }) => {
             <div
               key={tarea.id}
               onClick={() => handleCardClick(tarea)}
-              className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer overflow-hidden border border-gray-200 hover:border-blue-400"
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-blue-400"
             >
               <div className={`bg-gradient-to-r ${getEstadoColor(tarea.nom_estado)} px-4 py-3`}>
                 <h3 className={`font-mono text-sm ${getTextColor(tarea.nom_estado)} font-semibold`}>
@@ -142,37 +142,37 @@ const VerTareas = ({ setActiveSection, setTareaEdit }) => {
                 </h3>
               </div>
               <div className="p-4">
-                <h4 className="text-lg font-semibold text-gray-800 mb-3 line-clamp-2">
+                <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3 line-clamp-2">
                   {tarea.titulo}
                 </h4>
-                <div className="space-y-2 text-sm text-gray-600">
+                <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                   {tarea.empresa && (
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-400">🏢</span>
+                      <span className="text-gray-400 dark:text-gray-500">🏢</span>
                       <span className="truncate">{tarea.empresa}</span>
                     </div>
                   )}
                   {tarea.submodulo && (
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-400">📦</span>
+                      <span className="text-gray-400 dark:text-gray-500">📦</span>
                       <span className="truncate">{tarea.submodulo}</span>
                     </div>
                   )}
                   {tarea.rama && (
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-400">🌿</span>
+                      <span className="text-gray-400 dark:text-gray-500">🌿</span>
                       <span className="font-mono text-xs truncate">{tarea.rama}</span>
                     </div>
                   )}
                   {tarea.nom_estado && (
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-400">📊</span>
+                      <span className="text-gray-400 dark:text-gray-500">📊</span>
                       <span className="truncate">{tarea.nom_estado}</span>
                     </div>
                   )}
                 </div>
-                <div className="mt-4 pt-3 border-t border-gray-200">
-                  <p className="text-xs text-gray-500">
+                <div className="mt-4 pt-3 border-t border-gray-200 dark:border-gray-700">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
                     Actualizada: {new Date(tarea.updated_at).toLocaleDateString('es-ES')}
                   </p>
                 </div>

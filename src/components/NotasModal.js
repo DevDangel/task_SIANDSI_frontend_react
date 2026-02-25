@@ -40,12 +40,12 @@ const NotasModal = ({ tarea, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-5xl w-full h-[90vh] flex flex-col overflow-hidden">
-        <div className="bg-white text-gray-800 px-6 py-4 rounded-t-lg flex justify-between items-center border-b border-gray-200 flex-shrink-0">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-5xl w-full h-[90vh] flex flex-col overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-6 py-4 rounded-t-lg flex justify-between items-center border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
           <h3 className="text-xl font-bold">📝 Notas de la Tarea: {tarea.titulo}</h3>
           <button
             onClick={onClose}
-            className="text-gray-800 hover:text-gray-600 text-2xl font-bold"
+            className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 text-2xl font-bold"
             title='Cerrar'
           >
             ×
@@ -82,7 +82,7 @@ const NotasModal = ({ tarea, onClose }) => {
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
                 <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-                <p className="mt-4 text-gray-600">Cargando notas...</p>
+                <p className="mt-4 text-gray-600 dark:text-gray-400">Cargando notas...</p>
               </div>
             </div>
           ) : (
@@ -93,7 +93,7 @@ const NotasModal = ({ tarea, onClose }) => {
               spellCheck={false}
               autoCorrect="off"
               autoCapitalize="off"
-              className="flex-1 w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none overflow-auto"
+              className="flex-1 w-full p-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none overflow-auto"
               placeholder="Escribe tus notas aquí..."
             />
           )}

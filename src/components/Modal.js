@@ -24,13 +24,13 @@ const Modal = ({ tarea, onClose, onEdit }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-scroll" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-        <div className="bg-white text-gray-800 px-6 py-4 rounded-t-lg flex justify-between items-center border-b border-gray-200">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-scroll" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <div className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-6 py-4 rounded-t-lg flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center gap-4">
             <h3 className="text-xl font-bold">📋 Detalles de la Tarea</h3>
             <button
               onClick={() => onEdit(tarea)}
-              className="text-gray-800 hover:text-gray-600 text-lg"
+              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 text-lg"
               title="Ir a actualizarla"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +41,7 @@ const Modal = ({ tarea, onClose, onEdit }) => {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setShowNotas(true)}
-              className="px-3 py-1 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 text-sm flex items-center gap-1"
+              className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded hover:bg-gray-300 dark:hover:bg-gray-600 text-sm flex items-center gap-1"
               title="Ver Notas"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +50,7 @@ const Modal = ({ tarea, onClose, onEdit }) => {
             </button>
             <button
               onClick={onClose}
-              className="text-gray-800 hover:text-gray-600 text-2xl font-bold"
+              className="text-gray-800 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 text-2xl font-bold"
               title='Cerrar'
             >
               ×
@@ -60,24 +60,24 @@ const Modal = ({ tarea, onClose, onEdit }) => {
 
         <div className="p-6 space-y-4">
           <div>
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1">
               Código Único
             </label>
-            <p className="text-lg font-mono bg-gray-100 px-3 py-2 rounded">
+            <p className="text-lg font-mono bg-gray-100 dark:bg-gray-700 px-3 py-2 rounded">
               {tarea.codigo_unico}
             </p>
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1">
               Título
             </label>
-            <p className="text-lg text-gray-800">{tarea.titulo}</p>
+            <p className="text-lg text-gray-800 dark:text-gray-200">{tarea.titulo}</p>
           </div>
 
           {tarea.url_tarea && (
             <div>
-              <label className="block text-sm font-semibold text-gray-600 mb-1">
+              <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1">
                 URL Tarea
               </label>
               <a
@@ -93,28 +93,28 @@ const Modal = ({ tarea, onClose, onEdit }) => {
 
           {tarea.empresa && (
             <div>
-              <label className="block text-sm font-semibold text-gray-600 mb-1">
+              <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1">
                 Empresa
               </label>
-              <p className="text-gray-800">{tarea.empresa}</p>
+              <p className="text-gray-800 dark:text-gray-200">{tarea.empresa}</p>
             </div>
           )}
 
           {tarea.submodulo && (
             <div>
-              <label className="block text-sm font-semibold text-gray-600 mb-1">
+              <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1">
                 Submódulo
               </label>
-              <p className="text-gray-800">{tarea.submodulo}</p>
+              <p className="text-gray-800 dark:text-gray-200">{tarea.submodulo}</p>
             </div>
           )}
 
           {tarea.rama && (
             <div>
-              <label className="block text-sm font-semibold text-gray-600 mb-1">
+              <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1">
                 Rama
               </label>
-              <p className="font-mono text-gray-800 bg-gray-100 px-3 py-2 rounded">
+              <p className="font-mono text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 px-3 py-2 rounded">
                 {tarea.rama}
               </p>
             </div>
@@ -122,7 +122,7 @@ const Modal = ({ tarea, onClose, onEdit }) => {
 
           {tarea.nom_estado && (
             <div>
-              <label className="block text-sm font-semibold text-gray-600 mb-1">
+              <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1">
                 Estado
               </label>
               <p className={`${getEstadoBgColor(tarea.nom_estado)} text-white px-2 py-1 rounded font-semibold inline-block`}>{tarea.nom_estado}</p>
@@ -131,17 +131,17 @@ const Modal = ({ tarea, onClose, onEdit }) => {
 
           {tarea.hash_commit && (
             <div>
-              <label className="block text-sm font-semibold text-gray-600 mb-1">
+              <label className="block text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1">
                 Hash Commit
               </label>
-              <p className="font-mono text-gray-800 bg-gray-100 px-3 py-2 rounded">
+              <p className="font-mono text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 px-3 py-2 rounded">
                 {tarea.hash_commit}
               </p>
             </div>
           )}
 
           <div className="pt-4 border-t">
-            <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
+            <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 dark:text-gray-400">
               <div>
                 <span className="font-semibold">Creada:</span>{' '}
                 {new Date(tarea.created_at).toLocaleString('es-ES')}
@@ -154,7 +154,7 @@ const Modal = ({ tarea, onClose, onEdit }) => {
           </div>
         </div>
 
-        <div className="px-6 py-4 bg-gray-50 rounded-b-lg">
+        <div className="px-6 py-4 bg-gray-50 dark:bg-gray-900 rounded-b-lg">
           <button
             onClick={onClose}
             className="w-full px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
