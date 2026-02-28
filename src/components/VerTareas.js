@@ -62,8 +62,18 @@ const VerTareas = ({ setActiveSection, setTareaEdit }) => {
     try {
       setLoading(true);
       const response = await axios.get(API_URL);
-      setTareas(response.data);
-      setTareasFiltradas(response.data);
+        // Orden personalizado: En curso, Pruebas, RetroAlimentacion, resto
+        const order = ['En curso', 'Pruebas', 'RetroAlimentacion'];
+        const sortedTareas = response.data.slice().sort((a, b) => {
+          const indexA = order.indexOf(a.nom_estado);
+          const indexB = order.indexOf(b.nom_estado);
+          if (indexA === -1 && indexB === -1) return 0;
+          if (indexA === -1) return 1;
+          if (indexB === -1) return -1;
+          return indexA - indexB;
+        });
+        setTareas(sortedTareas);
+        setTareasFiltradas(sortedTareas);
     } catch (error) {
       console.error('Error al obtener tareas:', error);
     } finally {
