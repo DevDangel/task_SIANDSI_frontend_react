@@ -1,12 +1,20 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { API_TAREAS_URL } from '../config/api';
 
-const API_URL = 'https://tasksiandsibackendnodejs-production.up.railway.app/api/tareas';
+const API_URL = API_TAREAS_URL;
 
-const NotasModal = ({ tarea, onClose }) => {
+const NotasModal = ({ tarea, onClose, onNotesLoaded }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [notaDesc, setNotaDesc] = useState('');
   const [loading, setLoading] = useState(true);
+
+  const highlightImportant = (text) => {
+    if (!text) return '';
+    let html = text.replace(/\n/g, '<br>');
+    html = html.replace(/(importante)/gi, '<span style="color: red; font-weight: bold;">$1</span>');
+    return html;
+  };
 
   const fetchNotas = useCallback(async () => {
     try {
@@ -17,12 +25,15 @@ const NotasModal = ({ tarea, onClose }) => {
       } else {
         setNotaDesc('');
       }
+      const important = (response.data.length > 0 && response.data[0].nota_desc && response.data[0].nota_desc.toLowerCase().includes('importante')) || false;
+      onNotesLoaded(important);
     } catch (error) {
       console.error('Error al obtener notas:', error);
+      onNotesLoaded(false);
     } finally {
       setLoading(false);
     }
-  }, [tarea.id]);
+  }, [tarea.id, onNotesLoaded]);
 
   useEffect(() => {
     fetchNotas();
@@ -85,7 +96,7 @@ const NotasModal = ({ tarea, onClose }) => {
                 <p className="mt-4 text-gray-600 dark:text-gray-400">Cargando notas...</p>
               </div>
             </div>
-          ) : (
+          ) : isEditing ? (
             <textarea
               value={notaDesc}
               onChange={(e) => setNotaDesc(e.target.value)}
@@ -95,6 +106,11 @@ const NotasModal = ({ tarea, onClose }) => {
               autoCapitalize="off"
               className="flex-1 w-full p-4 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none overflow-auto"
               placeholder="Escribe tus notas aquí..."
+            />
+          ) : (
+            <div
+              className="flex-1 w-full p-4 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg overflow-auto"
+              dangerouslySetInnerHTML={{ __html: highlightImportant(notaDesc) }}
             />
           )}
         </div>

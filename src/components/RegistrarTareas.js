@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { API_TAREAS_URL } from '../config/api';
 
-const API_URL = 'https://tasksiandsibackendnodejs-production.up.railway.app/api/tareas';
+const API_URL = API_TAREAS_URL;
 
 const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
   const [mensaje, setMensaje] = useState({ tipo: '', texto: '' });
   const [isEditing, setIsEditing] = useState(false);
   const [estados, setEstados] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const empresaInputRef = useRef(null);
 
   useEffect(() => {
@@ -121,8 +123,8 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.codigo_unico || !formData.titulo) {
-      setMensaje({ tipo: 'error', texto: 'Código único y título son obligatorios' });
+    if (!formData.codigo_unico || !formData.titulo || !formData.estado) {
+      setMensaje({ tipo: 'error', texto: 'Código único, título y estado son obligatorios' });
       return;
     }
 
@@ -160,11 +162,12 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
     }
   };
 
-  const handleDelete = async () => {
-    if (!window.confirm('¿Estás seguro de que quieres eliminar esta tarea? Esta acción no se puede deshacer.')) {
-      return;
-    }
+  const handleDelete = () => {
+    setShowDeleteModal(true);
+  };
 
+  const confirmDelete = async () => {
+    setShowDeleteModal(false);
     try {
       await axios.delete(`${API_URL}/${formData.codigo_unico}`);
       setMensaje({ tipo: 'success', texto: '✅ Tarea eliminada exitosamente' });
@@ -177,6 +180,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
         empresa: '',
         submodulo: '',
         rama: '',
+        estado: '',
         hash_commit: ''
       });
       setIsEditing(false);
@@ -340,13 +344,14 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Estado
+              Estado <span className="text-red-500">*</span>
             </label>
             <select
               name="estado"
               value={formData.estado}
               onChange={handleInputChange}
               className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             >
               <option value="">Selecciona un estado</option>
               {estados.map((estado) => (
@@ -374,7 +379,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
         <div className="flex gap-4 mt-6">
           <button
             type="submit"
-            className="flex-1 px-6 py-3 bg-green-600 dark:bg-green-700 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-800 transition-colors font-semibold"
+            className="flex-1 px-6 py-3 bg-green-600 dark:bg-green-800 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-900 transition-colors font-semibold"
           >
             {isEditing ? '💾 Actualizar Tarea' : '➕ Crear Tarea'}
           </button>
@@ -382,7 +387,7 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
             <button
               type="button"
               onClick={handleDelete}
-              className="px-6 py-3 bg-red-600 dark:bg-red-700 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-800 transition-colors font-semibold"
+              className="px-6 py-3 bg-red-600 dark:bg-red-800 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-900 transition-colors font-semibold"
             >
               🗑️ Eliminar Tarea
             </button>
@@ -390,12 +395,36 @@ const RegistrarTareas = ({ tareaEdit, setTareaEdit }) => {
           <button
             type="button"
             onClick={limpiarFormulario}
-            className="px-6 py-3 bg-gray-500 dark:bg-gray-600 text-white rounded-lg hover:bg-gray-600 dark:hover:bg-gray-700 transition-colors"
+            className="px-6 py-3 bg-gray-500 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-600 dark:hover:bg-gray-800 transition-colors"
           >
             🔄 Limpiar
           </button>
         </div>
       </form>
+
+      {/* Modal de confirmación de eliminación */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Confirmar Eliminación</h3>
+            <p className="mb-6 text-gray-700 dark:text-gray-300">¿Estás seguro de que quieres eliminar esta tarea? Esta acción no se puede deshacer.</p>
+            <div className="flex gap-4">
+              <button
+                onClick={() => setShowDeleteModal(false)}
+                className="flex-1 px-4 py-2 bg-gray-500 dark:bg-gray-600 text-white rounded-lg hover:bg-gray-600 dark:hover:bg-gray-700 transition-colors"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={confirmDelete}
+                className="flex-1 px-4 py-2 bg-red-600 dark:bg-red-700 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-800 transition-colors"
+              >
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
